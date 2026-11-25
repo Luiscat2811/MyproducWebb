@@ -1,0 +1,175 @@
+﻿@model MyproducWeb.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - E-Commerce 2026</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+            /* Burbujas decorativas de fondo */
+            body::before, body::after {
+                content: '';
+                position: absolute;
+                width: 450px;
+                height: 450px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                z-index: 0;
+            }
+
+            body::before {
+                top: -100px;
+                left: -100px;
+            }
+
+            body::after {
+                bottom: -100px;
+                right: -100px;
+            }
+
+        .login-card {
+            border: none;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+            .login-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .brand-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px 15px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+            .form-control:focus {
+                background-color: #fff;
+                border-color: #764ba2;
+                box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15);
+            }
+
+        .input-group-text {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px 0 0 12px;
+            color: #764ba2;
+        }
+
+        .form-control.with-icon {
+            border-left: none;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .btn-login {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.3);
+        }
+
+            .btn-login:hover {
+                opacity: 0.95;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 25px rgba(118, 75, 162, 0.4);
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="card login-card p-4 p-md-5">
+
+                    <div class="brand-icon">
+                        <i class="bi bi-bag-heart-fill"></i>
+                    </div>
+
+                    <h3 class="text-center fw-bold text-dark mb-1">¡Bienvenido!</h3>
+                    <p class="text-center text-muted small mb-4">Accede a tu plataforma de productos</p>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger text-center border-0 rounded-3 shadow-sm py-2 small mb-4" style="background-color: #fff5f5; color: #e53e3e;">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i> @ViewBag.Error
+                        </div>
+                    }
+
+                    <form asp-controller="Acceso" asp-action="Index" method="post">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">CORREO ELECTRÓNICO</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                                <input asp-for="Correo" type="email" class="form-control with-icon" placeholder="ejemplo@tienda.com" required autocomplete="off" />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">CONTRASEÑA</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input asp-for="Clave" type="password" class="form-control with-icon" placeholder="••••••••" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-login w-100">
+                            <span>Ingresar al Sistema</span> <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <span class="text-muted" style="font-size: 0.75rem;">E-Commerce Security &copy; 2026</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
